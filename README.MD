@@ -12,7 +12,7 @@ A tool designed to view GIS data, with ease of use/installation in mind.
 
 * Cross Platform
 * METOC First Approach
-* Aimed to have support for all Web Services maintained by OGC.
+* Aimed to have support for all Web Services maintained by OGC. 
 
 
 
