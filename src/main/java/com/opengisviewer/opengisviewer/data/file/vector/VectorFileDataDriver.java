@@ -6,7 +6,7 @@ import org.geotools.api.data.SimpleFeatureSource;
 
 import java.io.IOException;
 
-public class VectorFileDataDriver extends FileDataDriver {
+public abstract class VectorFileDataDriver extends FileDataDriver {
 
     /**
      *
