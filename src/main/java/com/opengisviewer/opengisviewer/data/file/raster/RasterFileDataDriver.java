@@ -6,6 +6,7 @@ import org.geotools.api.coverage.grid.GridCoverage;
 import org.geotools.geometry.jts.ReferencedEnvelope;
 import org.opengis.geometry.Envelope;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 
@@ -22,7 +23,7 @@ public abstract class RasterFileDataDriver extends FileDataDriver {
      *
      * @return image content of source image. Can be gridded or imagery
      */
-    public abstract BufferedImage getImage();
+    public abstract Graphics2D getImage();
 
     /**
      *

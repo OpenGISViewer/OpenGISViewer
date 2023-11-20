@@ -5,6 +5,7 @@ import com.opengisviewer.opengisviewer.data.file.raster.utils.RasterDataType;
 import org.geotools.api.coverage.grid.GridCoverage;
 import org.opengis.geometry.Envelope;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class NetCDFDriver extends RasterFileDataDriver {
@@ -21,7 +22,7 @@ public class NetCDFDriver extends RasterFileDataDriver {
      * @return image content of source image. Can be gridded or imagery
      */
     @Override
-    public BufferedImage getImage() {
+    public Graphics2D getImage() {
         return null;
     }
 
