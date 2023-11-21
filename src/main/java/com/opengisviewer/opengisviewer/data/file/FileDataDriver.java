@@ -13,7 +13,10 @@ public abstract class FileDataDriver {
      * @param file java.io.File reference
      * @return returns a filesystem agnostic reference to provided local file
      */
-    public FileDataStore getFileDataStore(File file) throws IOException {
+    public static FileDataStore getFileDataStore(File file) throws IOException {
+        if(!file.exists()){
+            throw new IOException();
+        }
         return FileDataStoreFinder.getDataStore(file);
     }
 

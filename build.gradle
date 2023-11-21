@@ -16,10 +16,6 @@ repositories {
     mavenCentral()
 }
 
-ext {
-    junitVersion = '5.9.2'
-}
-
 sourceCompatibility = '17'
 targetCompatibility = '17'
 
@@ -28,11 +24,13 @@ tasks.withType(JavaCompile) {
 }
 
 
+
 application {
     mainModule = 'com.opengisviewer.opengisviewer'
     mainClass = 'com.opengisviewer.opengisviewer.HelloApplication'
 }
 
+// managing Java FX
 javafx {
     version = '17.0.6'
     modules = ['javafx.controls', 'javafx.fxml']
@@ -59,8 +57,8 @@ dependencies {
     testCompileOnly 'org.projectlombok:lombok:1.18.30'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.30'
 
-    testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.1")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.1")
 }
 
 test {

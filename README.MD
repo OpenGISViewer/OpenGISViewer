@@ -11,7 +11,8 @@ A tool designed to view GIS data, with ease of use/installation in mind.
 ## Benefits
 
 * Cross Platform
-* Mobile Deployment
+* METOC First Approach
+* Aimed to have support for all Web Services maintained by OGC. 
 
 
 
