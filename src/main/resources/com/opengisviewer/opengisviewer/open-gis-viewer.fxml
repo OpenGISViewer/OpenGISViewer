@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
    <top>
@@ -31,19 +31,9 @@
       </VBox>
    </top>
    <left>
-      <TreeView BorderPane.alignment="CENTER" />
+      <TreeView prefHeight="345.0" prefWidth="157.0" BorderPane.alignment="CENTER" />
    </left>
-   <bottom>
-      <HBox prefHeight="28.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-         <children>
-            <TextField />
-            <Separator orientation="VERTICAL" prefHeight="200.0" />
-            <TextField />
-            <Separator orientation="VERTICAL" prefHeight="200.0" />
-            <TextField />
-            <Separator orientation="VERTICAL" prefHeight="200.0" />
-            <TextField />
-         </children>
-      </HBox>
-   </bottom>
+   <center>
+      <ImageView pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+   </center>
 </BorderPane>
