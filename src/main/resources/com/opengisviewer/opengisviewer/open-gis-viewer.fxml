@@ -31,7 +31,7 @@
       </VBox>
    </top>
    <left>
-      <TreeView prefHeight="345.0" prefWidth="157.0" BorderPane.alignment="CENTER" />
+       <fx:include source="./panels/DataPanel.fxml" fx:id="DataPanel" />
    </left>
    <center>
       <ImageView pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
