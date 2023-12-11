@@ -3,7 +3,7 @@ package com.opengisviewer.opengisviewer;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class HelloController {
+public class OpenGISViewerController {
     @FXML
     private Label welcomeText;
 
