@@ -13,7 +13,7 @@
     <VBox BorderPane.alignment="CENTER" >
         <Label text="Data URL" />
         <TextArea fx:id="urlTextArea" prefHeight="10.0" prefWidth="200.0" />
-        <Button fx:id="findUrlButton" mnemonicParsing="false" text="Find" />
+        <Button fx:id="findUrlButton" mnemonicParsing="false" text="Find" onMouseClicked="#getUrl"/>
         <TreeView fx:id="dataTree" prefHeight="345.0" prefWidth="157.0" BorderPane.alignment="CENTER" />
     </VBox>
 </AnchorPane>
