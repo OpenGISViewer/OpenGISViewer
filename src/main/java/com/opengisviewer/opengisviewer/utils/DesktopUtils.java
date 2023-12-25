@@ -2,7 +2,7 @@ package com.opengisviewer.opengisviewer.utils;
 
 import java.awt.*;
 
-public class DesktopTools {
+public class DesktopUtils {
     /**
      *
      * @return resolution of primary display
