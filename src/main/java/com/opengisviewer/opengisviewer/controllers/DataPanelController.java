@@ -1,7 +1,5 @@
 package com.opengisviewer.opengisviewer.controllers;
 
-import com.opengisviewer.opengisviewer.utils.ResourceUtils;
-import com.opengisviewer.opengisviewer.utils.XMLUtils;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -11,8 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 
 import static com.opengisviewer.opengisviewer.controllers.ApplicationTools.generateAlert;
@@ -37,7 +33,7 @@ public class DataPanelController {
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
 
-            //TODO: need to convert/get proper get capabilities xsds for all wms services
+            //TODO: need to convert/get proper get capabilities XSDs for all wms services.... likely need to loop through all of them and validate against, or smartly find version.... but need to do this efficiently.... interesting problem.
             boolean isValidGetCapabilities = true; // XMLUtils.validateXMLSchema(ResourceUtils.getResourceFileStream() ,con.getInputStream());
             if(isValidGetCapabilities){
                 try(BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()))){
@@ -49,7 +45,7 @@ public class DataPanelController {
 
                 }
             } else {
-                generateAlert(Alert.AlertType.ERROR, "Invalid Get Capabilities Document ", "Invalid Get Capabilities", "Invalid Get Capabilities document found, please verify tthat your server is properly configured.");
+                generateAlert(Alert.AlertType.ERROR, "Invalid Get Capabilities Document ", "Invalid Get Capabilities", "Invalid Get Capabilities document found, please verify that your server is properly configured.");
             }
 
 
