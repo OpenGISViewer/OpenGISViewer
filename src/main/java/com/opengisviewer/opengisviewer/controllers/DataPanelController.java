@@ -1,5 +1,7 @@
 package com.opengisviewer.opengisviewer.controllers;
 
+import com.opengisviewer.opengisviewer.utils.ResourceUtils;
+import com.opengisviewer.opengisviewer.utils.XMLUtils;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -7,7 +9,10 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TreeView;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.*;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 
 import static com.opengisviewer.opengisviewer.controllers.ApplicationTools.generateAlert;
@@ -28,9 +33,27 @@ public class DataPanelController {
 
         try {
             URL url = new URL(urlString);
-            // TODO: need to validate return from getting this URL get Capabilites request/ just service request returns proper capabilities document
 
-        } catch (MalformedURLException ex) { // handles no characters, or malformed URLs
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            con.setRequestMethod("GET");
+
+            //TODO: need to convert/get proper get capabilities xsds for all wms services
+            boolean isValidGetCapabilities = true; // XMLUtils.validateXMLSchema(ResourceUtils.getResourceFileStream() ,con.getInputStream());
+            if(isValidGetCapabilities){
+                try(BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()))){
+                    String inputLine;
+                    StringBuffer content = new StringBuffer();
+                    while ((inputLine = in.readLine()) != null) {
+                        content.append(inputLine);
+                    }
+
+                }
+            } else {
+                generateAlert(Alert.AlertType.ERROR, "Invalid Get Capabilities Document ", "Invalid Get Capabilities", "Invalid Get Capabilities document found, please verify tthat your server is properly configured.");
+            }
+
+
+        } catch (IOException ex) { // handles no characters, or malformed URLs
             log.error("No Valid URL provided");
             generateAlert(Alert.AlertType.ERROR, "Unable to reach URL", "Error", "No valid URL was provided.");
         }
