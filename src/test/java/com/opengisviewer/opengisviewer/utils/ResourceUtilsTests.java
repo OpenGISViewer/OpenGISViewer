@@ -11,7 +11,7 @@ public class ResourceUtilsTests {
     @Test
     public void getResourceFileStream_whenPathContainsResources_shouldReturnInputStream() {
         // given
-        String path = "resources/test.txt";
+        String path = "resources/test/test.txt";
 
         // when
         InputStream inputStream = ResourceUtils.getResourceFileStream(path);
@@ -23,7 +23,7 @@ public class ResourceUtilsTests {
     @Test
     public void getResourceFileStream_whenPathDoesNotContainResources_shouldReturnInputStream() {
         // given
-        String path = "test.txt";
+        String path = "test/test.txt";
 
         // when
         InputStream inputStream = ResourceUtils.getResourceFileStream(path);
