@@ -1,7 +1,5 @@
 package com.opengisviewer.opengisviewer.controllers;
 
-import com.opengisviewer.opengisviewer.utils.ResourceUtils;
-import com.opengisviewer.opengisviewer.utils.XMLUtils;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -11,8 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 
 import static com.opengisviewer.opengisviewer.controllers.ApplicationTools.generateAlert;
