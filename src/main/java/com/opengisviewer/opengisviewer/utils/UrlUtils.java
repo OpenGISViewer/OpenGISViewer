@@ -5,6 +5,12 @@ import java.net.URLEncoder;
 import java.util.Map;
 
 public class UrlUtils {
+    /**
+     *
+     * @param params Map of paramater and paramater value
+     * @return returns a string to be appended at the end of your base url
+     * @throws UnsupportedEncodingException
+     */
 
     public static String getParamsString(Map<String, String> params)
             throws UnsupportedEncodingException {

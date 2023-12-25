@@ -13,6 +13,13 @@ import java.net.URL;
 
 @Slf4j
 public class XMLUtils {
+
+    /**
+     *  validates xml content from an input stream against a xsd found in the resources directory
+     * @param xsdPath xsd path in the resources directory to be validated against.
+     * @param xmlStream XML content to validate.
+     * @return
+     */
     public static boolean validateXMLSchema(String xsdPath, InputStream xmlStream){
         try {
             SchemaFactory factory =
