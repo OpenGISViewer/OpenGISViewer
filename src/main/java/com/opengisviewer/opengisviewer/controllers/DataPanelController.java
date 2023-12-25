@@ -33,7 +33,7 @@ public class DataPanelController {
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
 
-            //TODO: need to convert/get proper get capabilities xsds for all wms services
+            //TODO: need to convert/get proper get capabilities XSDs for all wms services.... likelly need to loop through all of them and validate against, or smartly find version.... but need to do this efficiently.... interesting problem.
             boolean isValidGetCapabilities = true; // XMLUtils.validateXMLSchema(ResourceUtils.getResourceFileStream() ,con.getInputStream());
             if(isValidGetCapabilities){
                 try(BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()))){
@@ -45,7 +45,7 @@ public class DataPanelController {
 
                 }
             } else {
-                generateAlert(Alert.AlertType.ERROR, "Invalid Get Capabilities Document ", "Invalid Get Capabilities", "Invalid Get Capabilities document found, please verify tthat your server is properly configured.");
+                generateAlert(Alert.AlertType.ERROR, "Invalid Get Capabilities Document ", "Invalid Get Capabilities", "Invalid Get Capabilities document found, please verify that your server is properly configured.");
             }
 
 

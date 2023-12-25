@@ -9,7 +9,6 @@ import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 import java.io.*;
-import java.net.URL;
 
 @Slf4j
 public class XMLUtils {
@@ -18,7 +17,7 @@ public class XMLUtils {
      *  validates xml content from an input stream against a xsd found in the resources directory
      * @param xsdPath xsd path in the resources directory to be validated against.
      * @param xmlStream XML content to validate.
-     * @return
+     * @return validatio nstatus of provided xmlStream against the xsd
      */
     public static boolean validateXMLSchema(String xsdPath, InputStream xmlStream){
         try {

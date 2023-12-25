@@ -14,6 +14,6 @@ public class ResourceUtils {
             pathFromResourceDir = pathFromResourceDir.replaceAll("resources", "");
         }
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-        return classloader.getResourceAsStream("../../resources/" + pathFromResourceDir);
+        return classloader.getResourceAsStream("../../../resources/" + pathFromResourceDir);
     }
 }
