@@ -7,7 +7,7 @@ import java.util.Map;
 public class UrlUtils {
     /**
      *
-     * @param params Map of paramater and paramater value
+     * @param params Map of parameter and value
      * @return returns a string to be appended at the end of your base url
      */
 
@@ -25,5 +25,16 @@ public class UrlUtils {
         return !resultString.isEmpty()
                 ? resultString.substring(0, resultString.length() - 1)
                 : resultString;
+    }
+
+    /**
+     * returns the base url along with any url parameters provided in the map
+     * @param baseURLString
+     * @param params Map of parameter and value
+     * @return returns a string of your base url with any url parameters provided in the map
+     */
+    public static String getParamsString(String baseURLString, Map<String, String> params) {
+        String resultString = getParamsString(params);
+        return baseURLString + resultString;
     }
 }
