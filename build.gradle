@@ -39,7 +39,7 @@ javafx {
 dependencies {
 
     // GeoTools
-    implementation 'org.geotools:gt-wms:30.0'
+    implementation 'org.geotools:gt-wms:32.0'
     implementation 'org.geotools:gt-image:30.0'
     implementation 'org.geotools:gt-epsg-hsql:30.0'
     implementation 'org.geotools:gt-geotiff:30.0'

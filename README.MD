@@ -8,6 +8,8 @@ A tool designed to view GIS data, with ease of use/installation in mind.
 [![Java CI with Gradle](https://github.com/OpenGISViewer/OpenGISViewer/actions/workflows/gradle-build-ubuntu.yml/badge.svg)](https://github.com/OpenGISViewer/OpenGISViewer/actions/workflows/gradle-build-ubuntu.yml)
 [![Java CI with Gradle](https://github.com/OpenGISViewer/OpenGISViewer/actions/workflows/gradle-build-windows.yml/badge.svg)](https://github.com/OpenGISViewer/OpenGISViewer/actions/workflows/gradle-build-windows.yml)
 
+[![Qodana](https://github.com/OpenGISViewer/OpenGISViewer/actions/workflows/qodana.yml/badge.svg)](https://github.com/OpenGISViewer/OpenGISViewer/actions/workflows/qodana.yml)
+
 ## Benefits
 
 * Cross Platform
