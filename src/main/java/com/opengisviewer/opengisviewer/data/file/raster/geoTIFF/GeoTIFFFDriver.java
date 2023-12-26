@@ -66,7 +66,7 @@ public class GeoTIFFFDriver extends RasterFileDataDriver {
             GridCoverage2D coverage = tiffReader.read(null);
             return (Envelope) coverage.getEnvelope();
         } catch (FactoryException | IOException ex) {
-
+            log.error(ex.toString());
         }
         return null;
     }
