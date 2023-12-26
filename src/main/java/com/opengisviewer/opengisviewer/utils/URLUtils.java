@@ -4,7 +4,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
-public class UrlUtils {
+public class URLUtils {
     /**
      *
      * @param params Map of parameter and value

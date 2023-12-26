@@ -17,12 +17,11 @@ public class XMLUtils {
      *  validates xml content from an input stream against a xsd found in the resources directory
      * @param xsdPath xsd path in the resources directory to be validated against.
      * @param xmlStream XML content to validate.
-     * @return validatio nstatus of provided xmlStream against the xsd
+     * @return validate status of provided xmlStream against the xsd
      */
     public static boolean validateXMLSchema(String xsdPath, InputStream xmlStream){
         try {
-            SchemaFactory factory =
-                    SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+            SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
             Schema schema = factory.newSchema(new File(xsdPath));
             Validator validator = schema.newValidator();
             validator.validate(new StreamSource(xmlStream));
