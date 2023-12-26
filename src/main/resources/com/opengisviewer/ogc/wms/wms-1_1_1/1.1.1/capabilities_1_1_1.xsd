@@ -1,0 +1,516 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="WMT_MS_Capabilities" type="WMT_MS_CapabilitiesType">
+    <xs:annotation>
+      <xs:documentation> The DTD (Document Type Definition) given here must correspond to the version number declared in the WMT_MS_Capabilities element below.  Vendor-specific elements are defined here if needed.  If not needed, just leave this EMPTY declaration.  Do not
+  delete the declaration entirely.  end of DOCTYPE declaration  Note: this XML is just an EXAMPLE that attempts to show all
+required and optional elements for illustration.  Consult the Web Map
+Service 1.1.0 specification and the DTD for guidance on what to actually
+include and what to leave out.  The version number listed in the WMT_MS_Capabilities element here must
+correspond to the DTD declared above.  See the WMT specification document for
+how to respond when a client requests a version number not implemented by the
+server. </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="KeywordListType">
+    <xs:sequence>
+      <xs:element name="Keyword" maxOccurs="unbounded" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="bird"/>
+            <xs:enumeration value="roadrunner"/>
+            <xs:enumeration value="ambush"/>
+            <xs:enumeration value="road"/>
+            <xs:enumeration value="transportation"/>
+            <xs:enumeration value="atlas"/>
+            <xs:enumeration value="river"/>
+            <xs:enumeration value="canal"/>
+            <xs:enumeration value="waterway"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="OnlineResourceType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute ref="xlin:type" xmlns:xlin="http://www.w3.org/1999/xlink"/>
+        <xs:attribute ref="xlin:href" xmlns:xlin="http://www.w3.org/1999/xlink"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="ContactPersonPrimaryType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="ContactPerson"/>
+      <xs:element type="xs:string" name="ContactOrganization"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ContactAddressType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="AddressType"/>
+      <xs:element type="xs:string" name="Address"/>
+      <xs:element type="xs:string" name="City"/>
+      <xs:element type="xs:string" name="StateOrProvince"/>
+      <xs:element type="xs:string" name="PostCode"/>
+      <xs:element type="xs:string" name="Country"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ContactInformationType">
+    <xs:sequence>
+      <xs:element type="ContactPersonPrimaryType" name="ContactPersonPrimary"/>
+      <xs:element type="xs:string" name="ContactPosition"/>
+      <xs:element type="ContactAddressType" name="ContactAddress"/>
+      <xs:element type="xs:string" name="ContactVoiceTelephone"/>
+      <xs:element type="xs:string" name="ContactFacsimileTelephone"/>
+      <xs:element type="xs:string" name="ContactElectronicMailAddress"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ServiceType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="Name">
+        <xs:annotation>
+          <xs:documentation> The WMT-defined name for this type of service </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="xs:string" name="Title">
+        <xs:annotation>
+          <xs:documentation> Human-readable title for pick lists </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="xs:string" name="Abstract">
+        <xs:annotation>
+          <xs:documentation> Narrative description providing additional information </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="KeywordListType" name="KeywordList"/>
+      <xs:element type="OnlineResourceType" name="OnlineResource">
+        <xs:annotation>
+          <xs:documentation> Top-level web address of service or service provider.  See also OnlineResource
+  elements under &lt;DCPType>. </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="ContactInformationType" name="ContactInformation">
+        <xs:annotation>
+          <xs:documentation> Contact information </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="xs:string" name="Fees">
+        <xs:annotation>
+          <xs:documentation> Fees or access constraints imposed. </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="xs:string" name="AccessConstraints"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetType">
+    <xs:sequence>
+      <xs:element type="OnlineResourceType" name="OnlineResource">
+        <xs:annotation>
+          <xs:documentation> The URL here for invoking GetCapabilities using HTTP GET
+            is only a prefix to which a query string is appended.  The URL here for invoking GetCapabilities using HTTP GET
+            is only a prefix to which a query string is appended. </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PostType">
+    <xs:sequence>
+      <xs:element type="OnlineResourceType" name="OnlineResource">
+        <xs:annotation>
+          <xs:documentation> The URL here for invoking GetCapabilities using HTTP POST
+            includes the complete address to which a query would be sent in
+            XML format.  This is here for future expansion; no POST encoding
+	    has yet been defined. </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="HTTPType">
+    <xs:sequence>
+      <xs:element type="GetType" name="Get"/>
+      <xs:element type="PostType" name="Post" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DCPTypeType">
+    <xs:sequence>
+      <xs:element type="HTTPType" name="HTTP"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetCapabilitiesType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="Format"/>
+      <xs:element type="DCPTypeType" name="DCPType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetMapType">
+    <xs:sequence>
+      <xs:element name="Format" maxOccurs="unbounded" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="image/gif"/>
+            <xs:enumeration value="image/png"/>
+            <xs:enumeration value="image/jpeg"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="DCPTypeType" name="DCPType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetFeatureInfoType">
+    <xs:sequence>
+      <xs:element name="Format" maxOccurs="unbounded" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="application/vnd.ogc.gml"/>
+            <xs:enumeration value="text/plain"/>
+            <xs:enumeration value="text/html"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="DCPTypeType" name="DCPType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DescribeLayerType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="Format">
+        <xs:annotation>
+          <xs:documentation>optional; used only by SLD-enabled WMS</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="DCPTypeType" name="DCPType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RequestType">
+    <xs:sequence>
+      <xs:element type="GetCapabilitiesType" name="GetCapabilities"/>
+      <xs:element type="GetMapType" name="GetMap"/>
+      <xs:element type="GetFeatureInfoType" name="GetFeatureInfo"/>
+      <xs:element type="DescribeLayerType" name="DescribeLayer"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExceptionType">
+    <xs:sequence>
+      <xs:element name="Format" maxOccurs="unbounded" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="application/vnd.ogc.se_xml"/>
+            <xs:enumeration value="application/vnd.ogc.se_inimage"/>
+            <xs:enumeration value="application/vnd.ogc.se_blank"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="UserDefinedSymbolizationType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="SupportSLD"/>
+        <xs:attribute type="xs:string" name="UserLayer"/>
+        <xs:attribute type="xs:string" name="UserStyle"/>
+        <xs:attribute type="xs:string" name="RemoteWFS"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="AuthorityURLType">
+    <xs:sequence>
+      <xs:element type="OnlineResourceType" name="OnlineResource"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="name"/>
+  </xs:complexType>
+  <xs:complexType name="LatLonBoundingBoxType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="minx" use="optional"/>
+        <xs:attribute type="xs:string" name="miny" use="optional"/>
+        <xs:attribute type="xs:string" name="maxx" use="optional"/>
+        <xs:attribute type="xs:string" name="maxy" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BoundingBoxType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="SRS" use="optional"/>
+        <xs:attribute type="xs:string" name="minx" use="optional"/>
+        <xs:attribute type="xs:string" name="miny" use="optional"/>
+        <xs:attribute type="xs:string" name="maxx" use="optional"/>
+        <xs:attribute type="xs:string" name="maxy" use="optional"/>
+        <xs:attribute type="xs:string" name="resx" use="optional"/>
+        <xs:attribute type="xs:string" name="resy" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="LogoURLType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="Format"/>
+      <xs:element type="OnlineResourceType" name="OnlineResource"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="width"/>
+    <xs:attribute type="xs:string" name="height"/>
+  </xs:complexType>
+  <xs:complexType name="AttributionType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="Title"/>
+      <xs:element type="OnlineResourceType" name="OnlineResource"/>
+      <xs:element type="LogoURLType" name="LogoURL"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="IdentifierType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="authority" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="FeatureListURLType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="Format"/>
+      <xs:element type="OnlineResourceType" name="OnlineResource"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LegendURLType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="Format"/>
+      <xs:element type="OnlineResourceType" name="OnlineResource"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="width" use="optional"/>
+    <xs:attribute type="xs:string" name="height" use="optional"/>
+  </xs:complexType>
+  <xs:complexType name="StyleSheetURLType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="Format"/>
+      <xs:element type="OnlineResourceType" name="OnlineResource"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="StyleType">
+    <xs:sequence>
+      <xs:element name="Name">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="USGS"/>
+            <xs:enumeration value="ATLAS"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="Title">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="USGS Topo Map Style"/>
+            <xs:enumeration value="Road atlas style"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="Abstract">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Features are shown in a style like that used in USGS topographic maps."/>
+            <xs:enumeration value="Roads are shown in a style like that used in a commercial road atlas."/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="LegendURLType" name="LegendURL">
+        <xs:annotation>
+          <xs:documentation> A picture of a legend for a Layer in this Style </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="StyleSheetURLType" name="StyleSheetURL" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation> An XSL stylesheet describing how GML feature data will rendered to create
+             a map of this layer. </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ScaleHintType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="min"/>
+        <xs:attribute type="xs:string" name="max"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="MetadataURLType">
+    <xs:sequence>
+      <xs:element name="Format">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="text/plain"/>
+            <xs:enumeration value="text/xml"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="OnlineResourceType" name="OnlineResource"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="type" use="optional"/>
+  </xs:complexType>
+  <xs:complexType name="LayerType">
+    <xs:choice maxOccurs="unbounded" minOccurs="0">
+      <xs:element name="Name">
+        <xs:annotation>
+          <xs:documentation> This parent layer has a Name and can therefore be requested from a Map Server, yielding a map of all subsidiary layers. </xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="ROADS_1M"/>
+            <xs:enumeration value="RIVERS_1M"/>
+            <xs:enumeration value="ROADS_RIVERS"/>
+            <xs:enumeration value="Clouds"/>
+            <xs:enumeration value="Temperature"/>
+            <xs:enumeration value="Pressure"/>
+            <xs:enumeration value="ozone_image"/>
+            <xs:enumeration value="population"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="Title">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Roads at 1:1M scale"/>
+            <xs:enumeration value="Rivers at 1:1M scale"/>
+            <xs:enumeration value="Roads and Rivers"/>
+            <xs:enumeration value="Forecast cloud cover"/>
+            <xs:enumeration value="Forecast temperature"/>
+            <xs:enumeration value="Forecast barometric pressure"/>
+            <xs:enumeration value="Weather Forecast Data"/>
+            <xs:enumeration value="Global ozone distribution (1992)"/>
+            <xs:enumeration value="World population, annual"/>
+            <xs:enumeration value="Acme Corp. Map Server"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="Abstract">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Roads at a scale of 1 to 1 million."/>
+            <xs:enumeration value="Rivers at a scale of 1 to 1 million."/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="KeywordListType" name="KeywordList"/>
+      <xs:element name="SRS">
+        <xs:annotation>
+          <xs:documentation> See the spec to learn how some characteristics are inherited by
+           subsidiary layers. </xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="EPSG:26986"/>
+            <xs:enumeration value="EPSG:4326"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="LatLonBoundingBoxType" name="LatLonBoundingBox">
+        <xs:annotation>
+          <xs:documentation> An additional SRS for this layer  harmless repetition of common SRS  harmless repetition of common SRS </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="BoundingBoxType" name="BoundingBox">
+        <xs:annotation>
+          <xs:documentation> The optional resx and resy attributes below indicate the X and Y spatial
+           resolution in the units of that SRS.  The EPSG:4326 BoundingBox duplicates some of the info in LatLonBoundingBox
+           and is therefore optional, but using it here allows the additional
+           resolution attributes. </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="AttributionType" name="Attribution">
+        <xs:annotation>
+          <xs:documentation> Optional Title, URL and logo image of data provider. </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="IdentifierType" name="Identifier">
+        <xs:annotation>
+          <xs:documentation> Identifier whose meaning is defined in an AuthorityURL element </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="MetadataURLType" name="MetadataURL">
+        <xs:annotation>
+          <xs:documentation> Metadata specific to this particular layer.  The same FGDC metadata is offered in two formats. </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="FeatureListURLType" name="FeatureListURL"/>
+      <xs:element type="StyleType" name="Style">
+        <xs:annotation>
+          <xs:documentation> In addition to the Style specified in the parent Layer, this Layer is available in this style. </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="ScaleHintType" name="ScaleHint"/>
+      <xs:element type="LayerType" name="Layer">
+        <xs:annotation>
+          <xs:documentation> Example of a layer which is a static map of fixed
+         size which the server cannot subset or make transparent  Example of a layer which originated from another WMS and has been
+         "cascaded" by this WMS. </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="DimensionType" name="Dimension">
+        <xs:annotation>
+          <xs:documentation> Pressure is available at several elevations.
+         EPSG:5030 is WGS 84 ellipsoid, units in metres.
+         Pressure is also available at several times.
+         NOTE: first list all Dimension elements, then all Extent elements.  These weather data are available daily from 1999-01-01 through
+           2000-08-22. </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="ExtentType" name="Extent"/>
+      <xs:element type="AuthorityURLType" name="AuthorityURL">
+        <xs:annotation>
+          <xs:documentation> all layers are available in at least this SRS </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:choice>
+    <xs:attribute type="xs:string" name="queryable" use="optional"/>
+    <xs:attribute type="xs:string" name="opaque" use="optional"/>
+    <xs:attribute type="xs:string" name="noSubsets" use="optional"/>
+    <xs:attribute type="xs:string" name="fixedWidth" use="optional"/>
+    <xs:attribute type="xs:string" name="fixedHeight" use="optional"/>
+    <xs:attribute type="xs:string" name="cascaded" use="optional"/>
+  </xs:complexType>
+  <xs:complexType name="DimensionType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="name" use="optional"/>
+        <xs:attribute type="xs:string" name="units" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="ExtentType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="name" use="optional"/>
+        <xs:attribute type="xs:string" name="default" use="optional"/>
+        <xs:attribute type="xs:string" name="nearestValue" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="CapabilityType">
+    <xs:sequence>
+      <xs:element type="RequestType" name="Request"/>
+      <xs:element type="ExceptionType" name="Exception"/>
+      <xs:element type="xs:string" name="VendorSpecificCapabilities">
+        <xs:annotation>
+          <xs:documentation> Any text or markup is allowed here, as required to describe
+       vendor-specific capabilities.  Please define elements and attributes
+       in the DOCTYPE declaration at the start of the document.  This example is empty because no VSPs were defined in preamble </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="UserDefinedSymbolizationType" name="UserDefinedSymbolization">
+        <xs:annotation>
+          <xs:documentation> Place-holder for Styled Layer Descriptor (SLD)-enabled WMSes.
+       This element is absent for a basic WMS. </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="LayerType" name="Layer"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="WMT_MS_CapabilitiesType">
+    <xs:sequence>
+      <xs:element type="ServiceType" name="Service">
+        <xs:annotation>
+          <xs:documentation> Service Metadata </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="CapabilityType" name="Capability"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="version"/>
+    <xs:attribute type="xs:string" name="updateSequence"/>
+  </xs:complexType>
+</xs:schema>

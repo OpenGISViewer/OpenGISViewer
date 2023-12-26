@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="WMT_MS_Capabilities" type="WMT_MS_CapabilitiesType">
+    <xs:annotation>
+      <xs:documentation> The DTD (Document Type Definition) given here must correspond to the version number declared in the WMT_MS_Capabilities element below.  Output formats known to this server are defined here
+if necessary (only if a format not already listed in the WMT
+Capabilities DTD is needed).  To define a new format, place
+an entity definition for KnownFormats like the one below in
+the DOCTYPE declaration of your Capabilities XML, listing at
+minimum all of the formats you support and separating each
+by logical-OR (|) characters.  Then, define a new element
+for any formats not predefined by WMT.  For example, in the
+following list "SGI" is a server-specific format, while all
+the others are known WMT-wide.  Thus, SGI is included in the
+KnownFormats list and a new empty element &lt;SGI/> is
+defined.  Silicon Graphics RGB Format  other vendor-specific elements defined here  end of DOCTYPE declaration  The version number listed in the WMT_MS_Capabilities element here must correspond to the DTD declared above.  See the WMT specification document for how to respond when a client requests a version number not implemented by the server. </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="ServiceType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="Name">
+        <xs:annotation>
+          <xs:documentation> The WMT-defined name for this type of service </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="xs:string" name="Title">
+        <xs:annotation>
+          <xs:documentation> Human-readable title for pick lists </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="xs:string" name="Abstract">
+        <xs:annotation>
+          <xs:documentation> Narrative description providing additional information </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="xs:string" name="Keywords"/>
+      <xs:element type="xs:string" name="OnlineResource">
+        <xs:annotation>
+          <xs:documentation> Top-level address of service or service provider.  See also onlineResource attributes of &lt;DCPType> children. </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="xs:string" name="Fees">
+        <xs:annotation>
+          <xs:documentation> Fees or access constraints imposed. </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="xs:string" name="AccessConstraints"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FormatType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="SGI" minOccurs="0"/>
+      <xs:element type="xs:string" name="GIF" minOccurs="0"/>
+      <xs:element type="xs:string" name="JPEG" minOccurs="0"/>
+      <xs:element type="xs:string" name="PNG" minOccurs="0"/>
+      <xs:element type="xs:string" name="WebCGM" minOccurs="0"/>
+      <xs:element type="xs:string" name="SVG" minOccurs="0"/>
+      <xs:element type="xs:string" name="BLANK" minOccurs="0"/>
+      <xs:element type="xs:string" name="WMS_XML" minOccurs="0"/>
+      <xs:element type="xs:string" name="MIME" minOccurs="0"/>
+      <xs:element type="xs:string" name="GML.1" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="onlineResource" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="PostType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="onlineResource"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="HTTPType">
+    <xs:sequence>
+      <xs:element type="GetType" name="Get">
+        <xs:annotation>
+          <xs:documentation> The URL here for HTTP GET requests includes only the prefix before the '?' and the query string.  Clients are expected to append '?WMTVER=nnn&amp;etc' as described in the Web Map interface specification.  The URL here for HTTP GET requests includes only the prefix before the '?' and the query string.  Clients are expected to append '?WMTVER=nnn&amp;etc' as described in the Web Map interface specification.  The URL here for HTTP GET requests includes only the prefix before the '?' and the query string.  Clients are expected to append '?WMTVER=nnn&amp;etc' as described in the Web Map interface specification. </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="PostType" name="Post" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DCPTypeType">
+    <xs:sequence>
+      <xs:element type="HTTPType" name="HTTP"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MapType">
+    <xs:sequence>
+      <xs:element type="FormatType" name="Format"/>
+      <xs:element type="DCPTypeType" name="DCPType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CapabilitiesType">
+    <xs:sequence>
+      <xs:element type="FormatType" name="Format"/>
+      <xs:element type="DCPTypeType" name="DCPType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FeatureInfoType">
+    <xs:sequence>
+      <xs:element type="FormatType" name="Format"/>
+      <xs:element type="DCPTypeType" name="DCPType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RequestType">
+    <xs:sequence>
+      <xs:element type="MapType" name="Map"/>
+      <xs:element type="CapabilitiesType" name="Capabilities"/>
+      <xs:element type="FeatureInfoType" name="FeatureInfo"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExceptionType">
+    <xs:sequence>
+      <xs:element type="FormatType" name="Format"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="YMDType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="Title"/>
+      <xs:element type="xs:string" name="Abstract"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="required"/>
+  </xs:complexType>
+  <xs:complexType name="VendorSpecificCapabilitiesType">
+    <xs:sequence>
+      <xs:element type="YMDType" name="YMD"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LatLonBoundingBoxType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="minx" use="optional"/>
+        <xs:attribute type="xs:string" name="miny" use="optional"/>
+        <xs:attribute type="xs:string" name="maxx" use="optional"/>
+        <xs:attribute type="xs:string" name="maxy" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="StyleType">
+    <xs:sequence>
+      <xs:element name="Name">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="on"/>
+            <xs:enumeration value="off"/>
+            <xs:enumeration value="USGS Topo"/>
+            <xs:enumeration value="Rand McNally"/>
+            <xs:enumeration value="default"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="Title">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Show test grid"/>
+            <xs:enumeration value="Hide test grid"/>
+            <xs:enumeration value="Topo map style"/>
+            <xs:enumeration value="Road atlas style"/>
+            <xs:enumeration value="Default style"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="Abstract">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="The &quot;on&quot; style for the WMT Graticule causes that layer to be displayed."/>
+            <xs:enumeration value="The &quot;off&quot; style for the WMT Graticule causes that layer to be hidden even though it was requested from the Map Server.  Style=off is the same as not requesting the graticule at all."/>
+            <xs:enumeration value="Features are shown in a style like that used in USGS topographic maps."/>
+            <xs:enumeration value="Roads are shown in a style like that used in a Rand McNally road atlas."/>
+            <xs:enumeration value="Weather Data are only available in a single default style."/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="xs:string" name="StyleURL" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LayerType">
+    <xs:sequence>
+      <xs:element name="Name" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation> This parent layer has a Name and can therefore be requested from a Map Server, yielding a map of all subsidiary layers. </xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="wmt_graticule"/>
+            <xs:enumeration value="ROADS_1M"/>
+            <xs:enumeration value="RIVERS_1M"/>
+            <xs:enumeration value="ROADS_RIVERS"/>
+            <xs:enumeration value="Clouds"/>
+            <xs:enumeration value="Temperature"/>
+            <xs:enumeration value="Pressure"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="Title">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Alignment test grid"/>
+            <xs:enumeration value="Roads at 1:1M scale"/>
+            <xs:enumeration value="Rivers at 1:1M scale"/>
+            <xs:enumeration value="Roads and Rivers"/>
+            <xs:enumeration value="Forecast cloud cover"/>
+            <xs:enumeration value="Forecast temperature"/>
+            <xs:enumeration value="Forecast barometric pressure"/>
+            <xs:enumeration value="Weather Data"/>
+            <xs:enumeration value="Acme Corp. Map Server"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="Abstract" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="The WMT Graticule is a 10-degree grid suitable for testing alignment among Map Servers."/>
+            <xs:enumeration value="Roads at a scale of 1 to 1 million."/>
+            <xs:enumeration value="Rivers at a scale of 1 to 1 million."/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="Keywords" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="graticule test"/>
+            <xs:enumeration value="road transportation atlas"/>
+            <xs:enumeration value="river canal water"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="SRS" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation> The following characteristics are inherited by subsidiary layers. </xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="EPSG:26986"/>
+            <xs:enumeration value="EPSG:4326"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="LatLonBoundingBoxType" name="LatLonBoundingBox" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation> An additional SRS for this layer  harmless repetition of common SRS </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="DataURL" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="http://www.opengis.org?roads.xml"/>
+            <xs:enumeration value="http://www.opengis.org?rivers.xml"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="BoundingBoxType" name="BoundingBox" minOccurs="0"/>
+      <xs:element type="StyleType" name="Style" maxOccurs="unbounded" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation> In addition to the Style specified in the parent Layer, this Layer is available in this style. </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="ScaleHintType" name="ScaleHint" minOccurs="0"/>
+      <xs:element type="LayerType" name="Layer" maxOccurs="unbounded" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation> all layers are available in at least this SRS </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="queryable" use="optional"/>
+  </xs:complexType>
+  <xs:complexType name="BoundingBoxType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="SRS"/>
+        <xs:attribute type="xs:string" name="minx"/>
+        <xs:attribute type="xs:string" name="miny"/>
+        <xs:attribute type="xs:string" name="maxx"/>
+        <xs:attribute type="xs:string" name="maxy"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="ScaleHintType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="min"/>
+        <xs:attribute type="xs:string" name="max"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="CapabilityType">
+    <xs:sequence>
+      <xs:element type="RequestType" name="Request"/>
+      <xs:element type="ExceptionType" name="Exception"/>
+      <xs:element type="VendorSpecificCapabilitiesType" name="VendorSpecificCapabilities">
+        <xs:annotation>
+          <xs:documentation> Any text or markup is allowed here, as required to describe
+       server-specific options.  Please define elements and attributes
+       in the DOCTYPE declaration at the start of the document. </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="LayerType" name="Layer"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="WMT_MS_CapabilitiesType">
+    <xs:sequence>
+      <xs:element type="ServiceType" name="Service">
+        <xs:annotation>
+          <xs:documentation> Service Metadata </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="CapabilityType" name="Capability"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="version"/>
+    <xs:attribute type="xs:string" name="updateSequence"/>
+  </xs:complexType>
+</xs:schema>
