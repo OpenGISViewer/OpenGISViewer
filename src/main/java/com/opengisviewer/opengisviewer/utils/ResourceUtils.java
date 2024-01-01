@@ -14,6 +14,16 @@ public class ResourceUtils {
             pathFromResourceDir = pathFromResourceDir.replaceAll("resources/", "");
         }
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+
         return classloader.getResourceAsStream(pathFromResourceDir);
+    }
+
+    public static String getResourceFilePath(String pathFromResourceDir){
+        if(pathFromResourceDir.contains("resources")){
+            pathFromResourceDir = pathFromResourceDir.replaceAll("resources/", "");
+        }
+        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+
+        return classloader.getResource(pathFromResourceDir).getFile();
     }
 }

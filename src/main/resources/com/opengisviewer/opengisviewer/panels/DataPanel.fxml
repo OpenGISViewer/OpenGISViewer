@@ -6,7 +6,7 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.opengisviewer.opengisviewer.controllers.DataPanelController">
     <VBox focusTraversable="true" BorderPane.alignment="CENTER">
         <Label text="Data URL" />
-      <TextField promptText="Get Capabilities URL" />
+        <TextField fx:id="urlTextArea" promptText="Get Capabilities URL" />
         <Button fx:id="findUrlButton" mnemonicParsing="false" onMouseClicked="#getUrl" text="Find" />
         <TreeView fx:id="dataTree" prefHeight="345.0" prefWidth="157.0" BorderPane.alignment="CENTER" />
     </VBox>
