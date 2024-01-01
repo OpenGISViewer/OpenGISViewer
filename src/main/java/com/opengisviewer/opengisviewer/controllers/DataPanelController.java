@@ -1,10 +1,9 @@
 package com.opengisviewer.opengisviewer.controllers;
 
+import com.opengisviewer.opengisviewer.utils.ResourceUtils;
+import com.opengisviewer.opengisviewer.utils.XMLUtils;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TreeView;
+import javafx.scene.control.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
@@ -17,7 +16,8 @@ import static com.opengisviewer.opengisviewer.controllers.ApplicationTools.gener
 public class DataPanelController {
 
     @FXML
-    TextArea urlTextArea;
+    public TextField urlTextArea;
+
     @FXML
     Button findUrlButton;
     @FXML
@@ -34,7 +34,7 @@ public class DataPanelController {
             con.setRequestMethod("GET");
 
             //TODO: need to convert/get proper get capabilities XSDs for all wms services.... likely need to loop through all of them and validate against, or smartly find version.... but need to do this efficiently.... interesting problem.
-            boolean isValidGetCapabilities = true; // XMLUtils.validateXMLSchema(ResourceUtils.getResourceFileStream() ,con.getInputStream());
+            boolean isValidGetCapabilities = XMLUtils.validateXMLSchema(ResourceUtils.getResourceFilePath("com/opengisviewer/ogc/wms/wms-1_1_1/capabilities_1_1_1.xsd"), con.getInputStream());
             if(isValidGetCapabilities){
                 try(BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()))){
                     String inputLine;
