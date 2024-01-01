@@ -40,10 +40,10 @@ dependencies {
 
     // GeoTools
     implementation 'org.geotools:gt-wms:30.1'
-    implementation 'org.geotools:gt-image:30.0'
-    implementation 'org.geotools:gt-epsg-hsql:30.0'
-    implementation 'org.geotools:gt-geotiff:30.0'
-    implementation 'org.geotools:gt-shapefile:30.0'
+    implementation 'org.geotools:gt-image:30.1'
+    implementation 'org.geotools:gt-epsg-hsql:30.1'
+    implementation 'org.geotools:gt-geotiff:30.1'
+    implementation 'org.geotools:gt-shapefile:30.1'
 
     // Apache SIS
     implementation 'org.apache.sis.storage:sis-netcdf:1.3'
