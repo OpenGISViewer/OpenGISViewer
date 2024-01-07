@@ -5,6 +5,10 @@ import com.opengisviewer.opengisviewer.utils.XMLUtils;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import lombok.extern.slf4j.Slf4j;
+import org.geotools.ows.ServiceException;
+import org.geotools.ows.wms.WMSCapabilities;
+import org.geotools.ows.wms.WebMapServer;
+import org.xml.sax.SAXException;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -33,27 +37,25 @@ public class DataPanelController {
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
 
-            //TODO: need to convert/get proper get capabilities XSDs for all wms services.... likely need to loop through all of them and validate against, or smartly find version.... but need to do this efficiently.... interesting problem.
-            boolean isValidGetCapabilities = XMLUtils.validateXMLSchema(ResourceUtils.getResourceFilePath("com/opengisviewer/ogc/wms/wms-1_1_1/capabilities_1_1_1.xsd"), con.getInputStream());
-            if(isValidGetCapabilities){
-                try(BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()))){
-                    String inputLine;
-                    StringBuffer content = new StringBuffer();
-                    while ((inputLine = in.readLine()) != null) {
-                        content.append(inputLine);
-                    }
-
+            WebMapServer wms = new WebMapServer(url);
+            WMSCapabilities capabilities = wms.getCapabilities();
+            try (BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()))) {
+                String inputLine;
+                StringBuffer content = new StringBuffer();
+                while ((inputLine = in.readLine()) != null) {
+                    content.append(inputLine);
                 }
-            } else {
-                generateAlert(Alert.AlertType.ERROR, "Invalid Get Capabilities Document ", "Invalid Get Capabilities", "Invalid Get Capabilities document found, please verify that your server is properly configured.");
+            } catch (Exception e) {
+                log.error("lol fix-me-later");
             }
-
-
-        } catch (IOException ex) { // handles no characters, or malformed URLs
+        } catch (IOException e) {
             log.error("No Valid URL provided");
             generateAlert(Alert.AlertType.ERROR, "Unable to reach URL", "Error", "No valid URL was provided.");
+        } catch (ServiceException e) {
+            //The server returned a ServiceException (unusual in this case)
+        } catch (SAXException e) {
+            generateAlert(Alert.AlertType.ERROR, "Invalid Get Capabilities Document ", "Invalid Get Capabilities", "Invalid Get Capabilities document found, please verify that your server is properly configured.");
         }
-
     }
 
 }
